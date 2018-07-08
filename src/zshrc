@@ -26,3 +26,6 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Aliases
 alias v="vim"
+
+export VISUAL=vim
+export EDITOR="$VISUAL"

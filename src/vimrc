@@ -33,7 +33,13 @@ command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 syntax on
 filetype plugin indent on
 set tabstop=4
-" " when indenting with '>', use 4 spaces width
+" when indenting with '>', use 4 spaces width
 set shiftwidth=2
-" " On pressing tab, insert 4 spaces
 set expandtab
+" trim spaces on save
+autocmd BufWritePre <buffer> %s/\s\+$//e
+" restrict above with adding FileType java,cpp,php just after autocmd
+
+" Hybrid line numbers (relative + current)
+set number
+set relativenumber
