@@ -10,6 +10,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'chr4/nginx.vim'
+Plugin 'junegunn/goyo.vim'
 " All plugins above
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -28,18 +29,29 @@ endif
 
 " bind \ (backward slash) to grep shortcut
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap ` :Ag<SPACE>
 
 " general
+set number                     " Show current line number
+set relativenumber             " Show relative line numbers
 syntax on
 filetype plugin indent on
+
 set tabstop=4
-" when indenting with '>', use 4 spaces width
 set shiftwidth=2
 set expandtab
+
+" Easier buffer navigation, \b
+nnoremap <Leader>b :ls<CR>:b<Space>
+nnoremap <Leader>e :b<Space>#<CR>
+
+nnoremap S "_diwP
+
+
 " trim spaces on save
 autocmd BufWritePre <buffer> %s/\s\+$//e
 " restrict above with adding FileType java,cpp,php just after autocmd
 
-" Hybrid line numbers (relative + current)
-set number
-set relativenumber
+" Make backspace work normally
+set backspace=indent,eol,start
+let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
