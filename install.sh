@@ -1,3 +1,5 @@
+#!/bin/bash
+
 INFOS=();
 
 install () {
@@ -17,8 +19,20 @@ vundle_install() {
 fi
 }
 
+install_zsh() {
+    if [ ! -f /usr/bin/zsh ]; then
+        sudo apt install -y zsh;
+        chsh -s /usr/bin/zsh $USER;
+        echo "Installing oh-my-zsh.";
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    else
+        INFOS+="Zsh is already installed. Nothing to do.";
+    fi
+}
+
 install;
 vundle_install;
+install_zsh;
 
 for msg in "${INFOS[@]}"
 do
