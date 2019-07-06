@@ -2,7 +2,13 @@
 
 INFOS=();
 
-install () {
+install_git() {
+    if [ ! -f /usr/bin/git ]; then
+        sudo apt install git;
+    fi
+}
+
+install_files() {
     for file in src/*; do
       echo "Installing $file";
       FILENAME=$(basename $file);
@@ -16,7 +22,7 @@ vundle_install() {
     else
         git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim;
         INFOS+="To finish up vundle installation, open vim and run :VundleInstall command";
-fi
+    fi
 }
 
 install_zsh() {
@@ -30,7 +36,8 @@ install_zsh() {
     fi
 }
 
-install;
+install_vim;
+install_files;
 vundle_install;
 install_zsh;
 
