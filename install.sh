@@ -2,6 +2,12 @@
 
 INFOS=();
 
+install_curl() {
+    if [ ! -f /usr/bin/curl ]; then
+        sudo apt install curl;
+    fi
+}
+
 install_git() {
     if [ ! -f /usr/bin/git ]; then
         sudo apt install git;
@@ -29,17 +35,23 @@ install_zsh() {
     if [ ! -f /usr/bin/zsh ]; then
         sudo apt install -y zsh;
         chsh -s /usr/bin/zsh $USER;
-        echo "Installing oh-my-zsh.";
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     else
         INFOS+="Zsh is already installed. Nothing to do.";
     fi
 }
 
-install_vim;
+install_oh_my_zsh() {
+    if [ ! -d ~/.oh_my_zsh ]; then
+        echo "Installing oh-my-zsh.";
+            sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    fi
+}
+
+install_curl;
 install_files;
 vundle_install;
 install_zsh;
+install_oh_my_zsh;
 
 for msg in "${INFOS[@]}"
 do
