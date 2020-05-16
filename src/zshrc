@@ -40,3 +40,4 @@ export EDITOR="$VISUAL"
 # Added outside of dotfiles.
 #
 alias docker='sudo docker'
+alias tmux='tmux attach || tmux'
